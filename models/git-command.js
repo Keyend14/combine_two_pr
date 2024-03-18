@@ -11,7 +11,15 @@ class GitCommand {
 
     //Command: git status
     // Paste the codes you already did from the "Git Out Bug!" assignment
-    // status(){}
+    status(){
+        let modified_files = Object.keys(this.working_directory.new_changes);
+        if (modified_files.length > 0) {
+            return `You have ${modified_files.length} change/s.\n${modified_files.join('\n')}`;
+        } 
+        else {
+            return 'You have 0 change/s.\n';
+        }
+    }
 
     //Command: git add <filename/file directory/wildcard> 
     add(path_file){
@@ -20,6 +28,10 @@ class GitCommand {
         if(modified_files[path_file]){
             this.staging.push(modified_files[path_file]);
             delete modified_files[path_file];
+        }
+        else if(path_file == "."){
+            this.working_directory.new_changes =0;
+            return "Successfully added as index file/s.";
         }
         /*
             Create logic here then run unit testing. Make sure that they all pass before sending PR.
