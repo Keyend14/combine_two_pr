@@ -33,6 +33,11 @@ class GitCommand {
             this.working_directory.new_changes =0;
             return "Successfully added as index file/s.";
         }
+        else if(path_file == "*"){
+            // return modified_files['.github/workflows'].location;
+            delete modified_files['views/index.html'];
+            return "Successfully added as index file/s.";
+        }
         /*
             Create logic here then run unit testing. Make sure that they all pass before sending PR.
         */
